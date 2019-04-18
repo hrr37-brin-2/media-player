@@ -1,4 +1,5 @@
 var mongoose = require ('mongoose');
+mongoose.Promise = Promise
 var faker = require ('faker');
 
 mongoose.connect('mongodb://localhost:27017/media',{ useNewUrlParser: true })
@@ -76,5 +77,29 @@ const getData = (id, callback) => {
   })
 }
 
+const createAlbum = async (req, res) => {
+  const { album } = req.body;
+  try {
+    const existingAlbum = await Album.findOne({
+      artist: album.artist,
+      albumTitle: album.albumTitle
+    })
+
+    if (existingAlbum){
+      return res.status(400).json({
+        error: "Album Already exist"
+      })
+    }
+    let newAlbum = new Album(album);
+    newAlbum = await newAlbum.save()
+    return res.status(201).json({album: newAlbum})
+  }catch(e){
+    return res.status(500).json({
+      error: e.message
+    })
+  }
+}
+
 module.exports.seedDB = seedDB;
 module.exports.getData = getData;
+module.exports.createAlbum = createAlbum;
