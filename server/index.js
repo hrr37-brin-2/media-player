@@ -25,6 +25,7 @@ app.get('/media/:id', (req,res) =>{
   })
 })
 app.post('/media', db.createAlbum)
+app.put('/media/:id', db.updateAlbum)
 
 app.get('/*', (req, res) => {
   res.sendFile(DIST_DIR + "/index.html")

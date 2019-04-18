@@ -100,6 +100,25 @@ const createAlbum = async (req, res) => {
   }
 }
 
+const updateAlbum = async (req, res) => {
+  const { album } = req.body;
+  const { id } = req.params
+  try {
+    // use findOneAndUpdate in mongoose
+    const updatedAlbum = await Album.findOneAndUpdate({_id: id}, album, {new: true})
+
+    return res.status(202).json({
+      album: updatedAlbum
+    })
+  }catch(e){
+    return res.status(500).json({
+      error: e.message
+    })
+  }
+}
+
+
 module.exports.seedDB = seedDB;
 module.exports.getData = getData;
 module.exports.createAlbum = createAlbum;
+module.exports.updateAlbum = updateAlbum
