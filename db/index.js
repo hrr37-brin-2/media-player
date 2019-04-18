@@ -117,8 +117,26 @@ const updateAlbum = async (req, res) => {
   }
 }
 
+const deleteAlbum = async (req, res) => {
+  const { id } = req.params
+  try {
+    // use findOneAndDelete
+    await Album.findOneAndDelete({_id: id});
+
+    return res.status(202).json({
+      message: "Deletion successful"
+    })
+  }catch(e){
+    return res.status(500).json({
+      error: e.message
+    })
+  }
+}
+
+
 
 module.exports.seedDB = seedDB;
 module.exports.getData = getData;
 module.exports.createAlbum = createAlbum;
-module.exports.updateAlbum = updateAlbum
+module.exports.updateAlbum = updateAlbum;
+module.exports.deleteAlbum = deleteAlbum;
