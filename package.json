@@ -30,6 +30,7 @@
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-motion": "^0.5.2",
+    "sequelize": "^5.7.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {
