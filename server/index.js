@@ -25,7 +25,9 @@ app.get('/media/:id', (req,res) =>{
   })
 })
 app.post('/media', db.createAlbum);
+
 app.put('/media/:id', db.updateAlbum);
+
 app.delete('/media/:id', db.deleteAlbum);
 
 app.get('/*', (req, res) => {
