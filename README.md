@@ -37,3 +37,12 @@ npm install -g webpack
 npm install
 ```
 
+// Added endpoints of POST, PUT and DELETE ================
+
+GET - /media/:id
+
+POST - /media a
+
+PUT - /media/:id
+
+DELETE - /media/:id

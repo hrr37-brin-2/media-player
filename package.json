@@ -10,7 +10,7 @@
   "scripts": {
     "build": "webpack -d --config webpack.config.js --watch",
     "start": "nodemon server/index.js",
-    "seed": "node db/seedDB.js",
+    "sequelize-seed": "NODE_OPTIONS='--max-old-space-size=10240' sequelize db:seed:all",
     "test": "jest"
   },
   "dependencies": {
@@ -19,15 +19,19 @@
     "babel-jest": "^24.5.0",
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "csv-write-stream": "^2.0.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "install": "^0.12.2",
     "jquery": "^3.3.1",
     "mongoose": "^5.4.20",
     "nodemon": "^1.18.10",
+    "pg": "^7.10.0",
+    "pg-hstore": "^2.3.2",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-motion": "^0.5.2",
+    "sequelize": "^5.7.0",
     "styled-components": "^4.2.0"
   },
   "devDependencies": {

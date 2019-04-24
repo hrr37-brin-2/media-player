@@ -1,4 +1,5 @@
 var mongoose = require ('mongoose');
+mongoose.Promise = Promise
 var faker = require ('faker');
 
 mongoose.connect('mongodb://localhost:27017/media',{ useNewUrlParser: true })
@@ -76,5 +77,66 @@ const getData = (id, callback) => {
   })
 }
 
+const createAlbum = async (req, res) => {
+  const { album } = req.body;
+  try {
+    const existingAlbum = await Album.findOne({
+      artist: album.artist,
+      albumTitle: album.albumTitle
+    })
+
+    if (existingAlbum){
+      return res.status(400).json({
+        error: "Album Already exist"
+      })
+    }
+    let newAlbum = new Album(album);
+    newAlbum = await newAlbum.save()
+    return res.status(201).json({album: newAlbum})
+  }catch(e){
+    return res.status(500).json({
+      error: e.message
+    })
+  }
+}
+
+const updateAlbum = async (req, res) => {
+  const { album } = req.body;
+  const { id } = req.params
+  try {
+    // use findOneAndUpdate in mongoose
+    const updatedAlbum = await Album.findOneAndUpdate({_id: id}, album, {new: true})
+
+    return res.status(202).json({
+      album: updatedAlbum
+    })
+  }catch(e){
+    return res.status(500).json({
+      error: e.message
+    })
+  }
+}
+
+const deleteAlbum = async (req, res) => {
+  const { id } = req.params
+  try {
+    // use findOneAndDelete
+    await Album.findOneAndDelete({_id: id});
+
+    return res.status(202).json({
+      message: "Deletion successful"
+    })
+  }catch(e){
+    return res.status(500).json({
+      error: e.message
+    })
+  }
+}
+
+
+
 module.exports.seedDB = seedDB;
 module.exports.getData = getData;
+module.exports.createAlbum = createAlbum;
+module.exports.updateAlbum = updateAlbum;
+module.exports.deleteAlbum = deleteAlbum;
