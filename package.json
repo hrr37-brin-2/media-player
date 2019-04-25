@@ -10,8 +10,6 @@
   "scripts": {
     "build": "webpack -d --config webpack.config.js --watch",
     "start": "nodemon server/index.js",
-    "seed": "node gen_data_postgres.js",
-    "sequelize-seed": "NODE_OPTIONS='--max-old-space-size=10240' sequelize db:seed:all",
     "test": "jest"
   },
   "dependencies": {
