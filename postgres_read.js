@@ -8,6 +8,5 @@ process.env.PGPASSWORD = "node_123";
 const pool = new Pool()
 query = "select * from albums where id = 10000000"
 pool.query(query, function(err, res) {
-  console.log(res.rows[0])
   pool.end()
 });

@@ -21,8 +21,8 @@ let Albums = sql.define({
   ]
 });
 
-let chunkSize = 55;
-let totalRecords = 10000000;
+let chunkSize = 150;
+let totalRecords = 1000;
 let rowsCount = 0;
 let start = 1;
 let end = chunkSize;
@@ -55,11 +55,39 @@ const writeRows = (rows) => {
   })().catch(e => console.error(e.stack))
 };
 
-const generateTracks = () =>  JSON.stringify([{
-    track: faker.lorem.paragraph(),
-    url: faker.image.imageUrl(),
-    lyrics: faker.lorem.paragraph()
-}]);
+const generateTracks = () =>{
+  const tracks = []
+  for (let i=1; i <= 10; i++){
+    const track = {
+      track: faker.random.words(4),
+      url: faker.image.imageUrl(),
+      lyrics: faker.lorem.paragraph()
+    }
+    tracks.push(track)
+
+  }
+  return JSON.stringify(tracks);
+}
+
+function createIndex() {
+	(async () => {
+	  const client = await pool.connect()
+	  let query = "CREATE index album_id_index on albums(id)";
+	  try {
+	    await client.query('BEGIN')
+	    await client.query(query)
+
+	    await client.query('COMMIT')
+	  } catch (e) {
+	    await client.query('ROLLBACK')
+	    throw e
+	  } finally {
+	    client.release()
+	    console.log("Index generated!")
+	  }
+	})().catch(e => console.error(e.stack));
+
+}
 
 const writeAlbumData = (start, stop) => {
   let output = [];
@@ -86,25 +114,7 @@ const writeAlbumData = (start, stop) => {
 
 const generateData = (start, end) => {
   if (start > totalRecords){
-
-  (async () => {
-	const client = await pool.connect()
-	let query = "select * from albums where id=10000000"
-	let startTime = (new Date()).getTime()
-	try {
-    await client.query('BEGIN')
-    await client.query(query)
-
-    await client.query('COMMIT')
-	} catch (e) {
-    await client.query('ROLLBACK')
-    throw e
-  } finally {
-    client.release()
-    let endTime = (new Date()).getTime()
-    console.log("Took " + (endTime-startTime) + " ms")
-    }
-  })().catch(e => console.error(e.stack));
+  	createIndex();
   } else {
     writeAlbumData(start, end);
   }
