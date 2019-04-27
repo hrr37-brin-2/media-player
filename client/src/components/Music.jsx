@@ -72,7 +72,7 @@ get(albumId){
     albumId = '/1';
   }
 
-  $.get(`http://localhost:3002/media${albumId}`, (data) => {
+  $.get(`http://ec2-52-70-127-56.compute-1.amazonaws.com:3002/media${albumId}`, (data) => {
     this.setState({
       artist:data.artist,
       album: data.tracks,
@@ -123,7 +123,7 @@ render() {
       <MediaContainer>
         <SongTitle> {this.state.currentTrack}&nbsp;&nbsp;&nbsp;&nbsp;{this.state.time}/{songDuration}</SongTitle>
         <PlayButton><PlaySymbol onClick={this.playTrack} playing = {this.state.play}></PlaySymbol></PlayButton>
-            <Slider type="range" min="0" max={this.state.audio.duration} value = {this.state.sliderValue || 0} step = "1" onChange = {this.handleSlider}/>
+            <Slider type="range" min="0" max={this.state.audio.duration || 0} value = {this.state.sliderValue || 0} step = "1" onChange = {this.handleSlider}/>
         <VolDown onClick={this.volumeDown}> </VolDown>
         <VolUp onClick={this.volumeUp}></VolUp><br></br>
       </MediaContainer>
@@ -175,7 +175,7 @@ const SongTitle =styled.div`
   grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 2;
-  justify-self: center;
+  text-align: center;
   font-size: 11px;
 `
 const Wrapper = styled.section`
