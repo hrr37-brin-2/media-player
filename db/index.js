@@ -1,7 +1,7 @@
 const { Pool } = require('pg');
 const sql = require('sql');
 
-process.env.PGHOST = "localhost";
+process.env.PGHOST = "3.86.139.108";
 process.env.PGDATABASE = "node_db";
 process.env.PGUSER = "node_user";
 process.env.PGPASSWORD = "node_123";
@@ -23,4 +23,28 @@ const getData = async (id, callback) => {
   }
 }
 
+const createAlbum = async (req, res) => {
+  const { album } = req.body;
+  try {
+    const existingAlbum = await Album.findOne({
+      artist: album.artist,
+      albumTitle: album.albumTitle
+    })
+
+    if (existingAlbum){
+      return res.status(400).json({
+        error: "Album Already exist"
+      })
+    }
+    let newAlbum = new Album(album);
+    newAlbum = await newAlbum.save()
+    return res.status(201).json({album: newAlbum})
+  }catch(e){
+    return res.status(500).json({
+      error: e.message
+    })
+  }
+}
+
 module.exports.getData = getData;
+module.exports.createAlbum = createAlbum;

@@ -17,7 +17,7 @@ const writeRows = (rows) => {
   rowsCount += rows.length;
   let percentage = (rowsCount * 100) / totalRecords;
   console.log(`Generated records count ${rowsCount}. Progress - ${percentage} %`);
-  query = "INSERT INTO albums (id, album_title, artist, artist_description, cover_art, created_at, tracks, updated_at) VALUES (?,?,?,?,?,?,?,?)"
+  query = "INSERT INTO albums (id, album_title, artist, artist_description, tracks) VALUES (?,?,?,?,?,?,?,?)"
 
   queries = []
   for (index=0;index<rows.length;index++) {
@@ -80,7 +80,7 @@ const generateData = (start, end) => {
   }
 };
 
-const query = "CREATE TABLE if not exists albums (id int primary key, artist text, album_title text, tracks text, artist_description text, cover_art text, created_at timestamp, updated_at timestamp )";
+const query = "CREATE TABLE if not exists albums (id int primary key, artist text, album_title text, tracks text, artist_description text)";
 
 client.execute(query, function(err, result) {
   if (err) {

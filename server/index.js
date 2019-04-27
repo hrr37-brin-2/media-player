@@ -26,9 +26,9 @@ app.get('/media/:id', (req,res) =>{
 })
 app.post('/media', db.createAlbum);
 
-app.put('/media/:id', db.updateAlbum);
+// app.put('/media/:id', db.updateAlbum);
 
-app.delete('/media/:id', db.deleteAlbum);
+// app.delete('/media/:id', db.deleteAlbum);
 
 app.get('/*', (req, res) => {
   res.sendFile(DIST_DIR + "/index.html")
@@ -36,6 +36,6 @@ app.get('/*', (req, res) => {
 
 var port = 3002;
 
-app.listen(port, ()=> {
+app.listen(port, '0.0.0.0', ()=> {
   console.log(`Listening to port ${port}`)
 })
