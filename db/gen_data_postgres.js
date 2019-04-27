@@ -20,7 +20,7 @@ let Albums = sql.define({
 });
 
 let chunkSize = 150;
-let totalRecords = 1000000;
+let totalRecords = 10000;
 let rowsCount = 0;
 let start = 1;
 let end = chunkSize;
@@ -68,7 +68,7 @@ const generateTracks = () =>{
 function createIndex() {
 	(async () => {
   const client = await pool.connect()
-  let query = "CREATE index album_id_index on albums(id)";
+  let query = "CREATE index IF NOT EXISTS album_id_index on albums(id)";
   try {
     await client.query('BEGIN')
     await client.query(query)
