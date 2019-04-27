@@ -19,8 +19,8 @@ let Albums = sql.define({
   ]
 });
 
-let chunkSize = 150;
-let totalRecords = 10000;
+let chunkSize = 100;
+let totalRecords = 10000000;
 let rowsCount = 0;
 let start = 1;
 let end = chunkSize;
