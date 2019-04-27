@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const sql = require('sql');
 const trackData = require('./albumTracks');
 
-process.env.PGHOST = "3.86.139.108";
+process.env.PGHOST = "172.31.86.92";
 process.env.PGDATABASE = "node_db";
 process.env.PGUSER = "node_user";
 process.env.PGPASSWORD = "node_123";
