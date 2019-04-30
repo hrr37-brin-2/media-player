@@ -3,7 +3,7 @@ const { Pool } = require('pg');
 const sql = require('sql');
 const trackData = require('./albumTracks');
 
-process.env.PGHOST = "172.31.86.92";
+process.env.PGHOST = "localhost";
 process.env.PGDATABASE = "node_db";
 process.env.PGUSER = "node_user";
 process.env.PGPASSWORD = "node_123";
@@ -19,7 +19,7 @@ let Albums = sql.define({
   ]
 });
 
-let chunkSize = 100;
+let chunkSize = 1000;
 let totalRecords = 10000000;
 let rowsCount = 0;
 let start = 1;
@@ -82,18 +82,18 @@ function createIndex() {
     console.log("Index generated!")
   }
 	})().catch(e => console.error(e.stack));
-};
+}
 
 const writeAlbumData = (start, stop) => {
   let output = [];
   for (let j = start; j <= stop; j++) {
-    let id = j;
+   // let id = j;
     let artist = faker.random.words(2);
     let album_title = faker.random.words(3);
     let tracks = generateTracks()
     let artist_description = faker.lorem.paragraph();
     output.push({
-      id,
+     // id,
       artist,
       album_title,
       tracks,
@@ -113,7 +113,7 @@ const generateData = (start, end) => {
 
 (async () => {
   const client = await pool.connect()
-  let query = "CREATE TABLE if not exists albums ( id bigint, artist text, album_title text, tracks text, artist_description text)"
+  let query = "CREATE TABLE if not exists albums ( id serial primary key, artist text, album_title text, tracks text, artist_description text)"
   try {
     await client.query('BEGIN')
     await client.query(query)

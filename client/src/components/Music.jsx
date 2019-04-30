@@ -72,7 +72,8 @@ get(albumId){
     albumId = '/1';
   }
 
-  $.get(`http://ec2-52-70-127-56.compute-1.amazonaws.com:3002/media${albumId}`, (data) => {
+  $.get(`/media${albumId}`, (data) => {
+    console.log(data)
     this.setState({
       artist:data.artist,
       album: data.tracks,
