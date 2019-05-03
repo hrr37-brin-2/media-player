@@ -17,7 +17,7 @@ class Music extends React.Component {
     url: "",
     time: "0:00",
     intervalId: null,
-    albumTitle:"",
+    album_title:"",
     sliderValue: 0,
     description:""
   }
@@ -74,14 +74,14 @@ get(albumId){
 
   $.get(`http://localhost:3002/media${albumId}`, (data) => {
     this.setState({
-      artist:data[0].artist,
-      album: data[0].album,
-      albumTitle: data[0].albumTitle,
-      currentTrack: data[0].album[0].track,
-      audio: new Audio(data[0].album[0].url),
-      url:data[0].album[0].url,
+      artist:data.artist,
+      album: data.tracks,
+      album_title: data.album_title,
+      currentTrack: data.tracks[0].track,
+      audio: new Audio(data.tracks[0].url),
+      url:data.tracks[0].url,
       time: this.state.audio.currentTime,
-      description: data[0].artistDescription
+      description: data.artist_description
     })
   })
 }
@@ -117,7 +117,7 @@ render() {
   return (
     <Wrapper>
       <br></br>
-      <Title>{this.state.albumTitle}<br></br>
+      <Title>{this.state.album_title}<br></br>
         <div style = {{fontSize: "15px"}}>By <Links>{this.state.artist}</Links></div>
       </Title>
       <MediaContainer>
