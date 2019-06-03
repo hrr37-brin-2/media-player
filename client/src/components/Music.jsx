@@ -32,7 +32,7 @@ class Music extends React.Component {
 }
 componentDidMount(){
   this.get(window.location.pathname);
-  var intervalId = setInterval(this.currentTrackTime, 10);
+  let intervalId = setInterval(this.currentTrackTime, 10);
   this.setState({intervalId: intervalId});
 }
 componentWillUnmount() {
@@ -40,8 +40,8 @@ componentWillUnmount() {
   clearInterval(this.state.intervalId);
 }
 currentTrackTime(){
-  var songTime =(parseInt(((this.state.audio.currentTime/60)-(parseInt(this.state.audio.currentTime/60)))*60));
-  var seconds = songTime < 10? "0"+ songTime: songTime
+  let songTime =(parseInt(((this.state.audio.currentTime/60)-(parseInt(this.state.audio.currentTime/60)))*60));
+  let seconds = songTime < 10? "0"+ songTime: songTime
 
   this.setState({
     time: (parseInt(this.state.audio.currentTime/60))+":"+ seconds,
@@ -142,7 +142,7 @@ const Descp = styled.div`
   font-size: 15px
 `
 
-var Slider = styled.input`
+const Slider = styled.input`
   grid-column-start: 2;
   grid-column-end: 2;
   grid-row-start: 3;

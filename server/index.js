@@ -1,12 +1,12 @@
 require('newrelic');
-var express = require ('express');
-var path = require ('path');
-var DIST_DIR = path.join(__dirname, '../client/dist');
-var db = require ('../db/index')
-var bodyParser =require ('body-parser');
-var cors = require ('cors');
+const express = require ('express');
+const path = require ('path');
+const DIST_DIR = path.join(__dirname, '../client/dist');
+const db = require ('../db/index')
+const bodyParser =require ('body-parser');
+const cors = require ('cors');
 
-var app = express();
+const app = express();
 
 app.use(cors());
 
@@ -18,11 +18,12 @@ app.use(bodyParser.json())
 
 
 app.get('/media/:id', (req,res) =>{
-  var id = req.params.id;
+  let id = req.params.id;
   db.getData(id, (data) => {
     res.json(data)
   })
 })
+
 app.post('/media', db.createAlbum);
 
 // app.put('/media/:id', db.updateAlbum);
@@ -33,7 +34,7 @@ app.get('*', (req, res) => {
   res.sendFile(DIST_DIR + "/index.html")
 })
 
-var port = 3002;
+const port = process.env.PORT || 3002;
 
 app.listen(port, '0.0.0.0', ()=> {
   console.log(`Listening to port ${port}`)

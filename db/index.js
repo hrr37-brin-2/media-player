@@ -25,7 +25,7 @@ const getData = async (id, callback) => {
 }
 
 const createAlbum = async (req, res) => {
-  const {artist, album_title, tracks, artist_description   } = req.body;
+  const {artist, album_title, tracks, artist_description } = req.body;
   const client = await pool.connect()
   const query = `insert into Albums (artist, album_title, tracks, artist_description) values ( '${artist}', '${album_title}', '${JSON.stringify(tracks)}', '${artist_description}')`
 
@@ -40,8 +40,6 @@ const createAlbum = async (req, res) => {
   } finally {
     client.release()
   }
-
-
 }
 
 module.exports.getData = getData;

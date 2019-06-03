@@ -4,4 +4,4 @@ import Music from './components/Music.jsx'
 
 window.Music = Music;
 
-ReactDOM.render(<Music />,document.getElementById('app'));
+ReactDOM.render(<Music />,document.getElementById('mediaplayer'));

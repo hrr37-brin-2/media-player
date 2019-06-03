@@ -29,6 +29,7 @@ function generateRandomData (userContext, events, done) {
   userContext.vars.artist_description = artist_description;
   //userContext.vars.id = id;
 
+
   // continue with executing the scenario:
   return done();
 }
