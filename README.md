@@ -4,7 +4,7 @@
 
 Tasked with reworking legacy codebases for backend of web application to improve scalability and handle higher traffic
 
-  - Creating data generation script and scaling database to generate and seed 10M records. 
+  - Creating data generation script and scaling database to generate and seed 10M records.
   - Stress testing and analyzing two databases, PostgreSQL and Cassandra, to determine best performance for the use case.
   - Building out CRUD API routes that will query and use the new database. Performance tuning as needed.
   - Scaling codebase to support 1000 requests per second on AWS EC2 using a t2.micro instance.
@@ -25,7 +25,11 @@ Tasked with reworking legacy codebases for backend of web application to improve
 
 Multiple npm scripts provided for convenience. View full list at package.json
 
-Basic startup of project after installing dependcies:
+Basic startup of project after installing dependencies:
+
+1. Add database credentials
+  1. `cp .env.example .env`
+  1. Fill database credentials & settings
 
 1. Seed database with npm script
    1. To seed database use: `npm run seed`
