@@ -1,9 +1,8 @@
 const { Pool, Client } = require('pg');
+const path = require ('path');
 
-process.env.PGHOST = "localhost";
-process.env.PGDATABASE = "node_db";
-process.env.PGUSER = "node_user";
-process.env.PGPASSWORD = "node_123";
+require('dotenv')
+  .config({ path: path.join(__dirname, '..', '..', '.env')});
 
 const pool = new Pool()
 query = "select * from albums where id = 10000000"

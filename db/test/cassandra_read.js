@@ -1,11 +1,15 @@
 const cassandra = require('cassandra-driver');
+const path = require ('path');
+
+require('dotenv')
+  .config({ path: path.join(__dirname, '..', '..', '.env')});
+
 
 let client = new cassandra.Client({
-  contactPoints: ['localhost'],
-  localDataCenter: 'datacenter1',
-  keyspace: 'sdc_kaz',
-  });
-
+  contactPoints: [process.env.CASSANDRA_HOST],
+  localDataCenter: process.env.CASSANDRA_DATA_CENTER,
+  keyspace: process.env.CASSANDRA_KEYSPACE,
+});
 
 query = "select * from albums where id=10000000 limit 1"
 

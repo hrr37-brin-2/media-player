@@ -3,11 +3,6 @@ const { Pool } = require('pg');
 const sql = require('sql');
 const trackData = require('./albumTracks');
 
-process.env.PGHOST = "localhost";
-process.env.PGDATABASE = "node_db";
-process.env.PGUSER = "node_user";
-process.env.PGPASSWORD = "node_123";
-
 let Albums = sql.define({
   name: 'albums',
   columns: [

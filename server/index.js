@@ -1,6 +1,12 @@
-require('newrelic');
-const express = require ('express');
 const path = require ('path');
+
+require('dotenv')
+  .config({ path: path.join(__dirname, '..', '.env')});
+
+  require('newrelic');
+
+const express = require ('express');
+
 const DIST_DIR = path.join(__dirname, '../client/dist');
 const db = require ('../db/index')
 const bodyParser =require ('body-parser');
