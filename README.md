@@ -23,7 +23,24 @@ Tasked with reworking legacy codebases for backend of web application to improve
 
 ## Usage
 
-> Some usage instructions
+Multiple npm scripts provided for convenience. View full list at package.json
+
+Basic startup of project after installing dependcies:
+
+1. Seed database with npm script
+   1. To seed database use: `npm run seed`
+
+1. Start server with node or nodemon
+   1. To start server with nodemon, install nodemon with npm -i nodemon then use: `npm run start`
+
+1. Build and bundle client side code with webpack:
+`npm run build`
+
+1. View module at http://localhost/3002/:id
+   1. Id is any number between 1-10000000 representing 10000000 albums with 10 tracks each
+
+1. Test project with jest:
+`npm test`
 
 ## Requirements
 
