@@ -28,8 +28,8 @@ Multiple npm scripts provided for convenience. View full list at package.json
 Basic startup of project after installing dependencies:
 
 1. Add database credentials
-  1. `cp .env.example .env`
-  1. Fill database credentials & settings
+   1. `cp .env.example .env`
+   1. Fill database credentials & settings
 
 1. Seed database with npm script
    1. To seed database use: `npm run seed`
