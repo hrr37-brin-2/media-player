@@ -1,0 +1,38 @@
+config:
+  target: 'http://localhost:3002'
+  http:
+    pool: 10
+  phases:
+    - duration: 120
+      arrivalRate: 1
+      name: "PHASE 1"
+    - duration: 120
+      arrivalRate: 10
+      name: "PHASE 2"
+    - duration: 120
+      arrivalRate: 100
+      name: "PHASE 3"
+    - duration: 120
+      arrivalRate: 1000
+      name: "PHASE 4"
+  processor: "./stressTest.js"
+
+scenarios:
+  - name: "GetRequest"
+    weight: 5
+    flow:
+      - function: "generateRandomID"
+      - get:
+          url: "/media/{{id}}"
+  - name: "PostRequest"
+    weight: 1
+    flow:
+     - function: "generateRandomData"
+     - post:
+          url: "/media"
+          json:
+            artist: "{{artist}}"
+            album_title: "{{album_title}}"
+            artist_description: "{{artist_description}}"
+            tracks: "{{tracks}}"
+            id: "{{id}}"
